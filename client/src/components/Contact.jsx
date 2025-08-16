@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import { MailContext } from "../context/mailContext";
 function Contact() {
+  const { sendEmail } = useContext(MailContext);
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [text, setText] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendEmail(name, email, text);
+  };
   return (
     <div
       id="contact"
@@ -44,13 +52,15 @@ function Contact() {
           <h1 className="text-xl sm:text-2xl font-bold text-center mb-6 font-serif">
             Contact Me
           </h1>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block mb-1 font-semibold text-sm sm:text-base">
                 Name
               </label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Your Name"
                 className="w-full p-2.5 sm:p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               />
@@ -63,6 +73,8 @@ function Contact() {
               <input
                 type="email"
                 placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full p-2.5 sm:p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               />
             </div>
@@ -74,6 +86,8 @@ function Contact() {
               <textarea
                 rows="4"
                 placeholder="Your Message"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
                 className="w-full p-2.5 sm:p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base resize-none"
               ></textarea>
             </div>

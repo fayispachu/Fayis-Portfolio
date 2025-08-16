@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import { MailProvider } from "./context/mailContext";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <MailProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </MailProvider>
       </BrowserRouter>
     </>
   );
