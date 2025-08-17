@@ -78,7 +78,6 @@ function Skills() {
               <h3 className="font-bold text-cyan-400 mb-1">{skill.name}</h3>
               <p className="text-gray-300">{skill.desc}</p>
             </div>
-
             <img
               src={skill.icon}
               alt={skill.name}

@@ -8,7 +8,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-    
   },
   "dependencies": {
     "@react-three/drei": "^10.6.1",
@@ -16,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "aos": "^2.3.4",
     "axios": "^1.11.0",
+    "lucide-react": "^0.539.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",

@@ -13,23 +13,24 @@ function Home() {
 
       <div
         id="home"
-        className="w-full bg-neutral-950 h-[100vh] flex flex-col md:flex-row py-20 px-6 md:py-32 md:px-20 lg:px-44 gap-10 md:gap-0"
+        className="w-full bg-neutral-950 min-h-screen flex flex-col md:flex-row items-center justify-center py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10"
       >
-        <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto text-center md:text-left">
-          <div className="flex flex-col text-white">
-            <h3 className="font-bold text-3xl sm:text-4xl md:text-5xl font-serif">
-              Hey
-            </h3>
-            <h1 className="font-bold text-4xl sm:text-5xl md:text-7xl font-serif">
-              I am Fayis k
-            </h1>
-          </div>
+        <div className="flex flex-col items-center md:items-start justify-center gap-4 w-full md:w-1/2 text-center md:text-left">
+          <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white font-serif">
+            Hey
+          </h3>
+          <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight">
+            I am Fayis K
+          </h1>
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-md">
+            A passionate full-stack developer who loves building modern web
+            applications and solving problems with code.
+          </p>
         </div>
 
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end items-center h-[80vh] bg-neutral-900 rounded-full p-5 ">
-          <div className="w-full rounded-full bg-white ">
-            {" "}
-            <img className="w-3/4 sm:w-2/3 md:w-[100%] " src={me} alt="Fayis" />
+        <div className="w-full md:w-1/2 flex justify-center md:justify-end items-center">
+          <div className="relative w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white">
+            <img className="w-full h-full object-cover" src={me} alt="Fayis" />
           </div>
         </div>
       </div>
