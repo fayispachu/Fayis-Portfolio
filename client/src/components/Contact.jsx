@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { MailContext } from "../context/mailContext";
+import { MailContext } from "../context/MailContext";
 function Contact() {
   const { sendEmail } = useContext(MailContext);
   useEffect(() => {
