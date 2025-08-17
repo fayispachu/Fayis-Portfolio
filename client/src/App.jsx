@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import { MailProvider } from "./context/mailContext";
+import { MailProvider } from "./context/MailContext";
 
 function App() {
   return (
