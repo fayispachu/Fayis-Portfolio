@@ -43,7 +43,7 @@ function Contact() {
               fayizpachu217@gmail.com
             </p>
             <p>
-              <span className="font-semibold">Phone:</span> +91 98765 43210
+              <span className="font-semibold">Phone:</span> +91 9744850680
             </p>
           </div>
         </div>

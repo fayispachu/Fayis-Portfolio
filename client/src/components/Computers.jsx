@@ -9,7 +9,7 @@ const Computers = () => {
       object={scene}
       scale={0.8}
       position={[0, -0.5, 0]}
-      rotation={[0, Math.PI / 6, 0]}
+      rotation={[0, 55, 0]}
     />
   );
 };

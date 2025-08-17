@@ -29,7 +29,7 @@ function Home() {
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center md:justify-end items-center">
-          <div className="relative w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white">
+          <div className="relative w-72 h-72 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white">
             <img className="w-full h-full object-cover" src={me} alt="Fayis" />
           </div>
         </div>
