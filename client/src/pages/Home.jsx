@@ -13,7 +13,7 @@ function Home() {
 
       <div
         id="home"
-        className="w-full bg-neutral-950 min-h-screen flex flex-col md:flex-row items-center justify-center py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10"
+        className="w-full bg-neutral-950 min-h-screen flex flex-col md:flex-row items-center  py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10"
       >
         <div className="flex flex-col items-center md:items-start justify-center gap-4 w-full md:w-1/2 text-center md:text-left">
           <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white font-serif">
