@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import mailRouter from "./router/mail.route.js";
 import { ConnectDataBase } from "./dataBase/db.js";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path, { dirname } from "path";
 dotenv.config();
 
 const app = express();
