@@ -14,7 +14,7 @@ const skills = [
   {
     icon: htmlicon,
     name: "HTML",
-    desc: "3+ years experience building semantic, accessible HTML structures.",
+    desc: "1+ years experience building semantic, accessible HTML structures.",
   },
   {
     icon: cssicon,
@@ -49,7 +49,7 @@ const skills = [
   {
     icon: githubicon,
     name: "GitHub",
-    desc: "Version control, collaboration, and CI/CD workflows.",
+    desc: "Version control, collaboration.",
   },
   {
     icon: figmaicon,
