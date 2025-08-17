@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import portfolioimage from "../assets/portfolio.png";
+import projectManagementImage from "../assets/projectmanagement.png";
+import cryptoDashboardImage from "../assets/crypto.png";
 const projects = [
   {
     title: "Project Management App",
     description:
       "A full-featured MERN stack app with role-based access control and real-time updates.",
-    image: "https://via.placeholder.com/300x200",
+    image: projectManagementImage,
     github: "https://github.com/fayispachu/Project-Management-App-New",
     demo: "#",
   },
@@ -13,7 +15,7 @@ const projects = [
     title: "Crypto Dashboard",
     description:
       "Live cryptocurrency tracking with interactive charts and responsive design.",
-    image: "https://via.placeholder.com/300x200",
+    image: cryptoDashboardImage,
     github: "#",
     demo: "#",
   },
