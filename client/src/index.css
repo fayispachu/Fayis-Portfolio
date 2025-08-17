@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+#logo{
+  border-radius: 50%;
+
+  
+}
