@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mailRouter from "./router/mail.route.js";
 import { ConnectDataBase } from "./dataBase/db.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 dotenv.config();
 
 const app = express();
@@ -22,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/api/mail", mailRouter);
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
