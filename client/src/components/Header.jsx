@@ -21,36 +21,66 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const navLinks = [
-    { id: "home", label: "HOME" },
-    { id: "about", label: "ABOUT" },
-    { id: "projects", label: "PROJECTS" },
-    { id: "skills", label: "SKILLS" },
-    { id: "contact", label: "CONTACT" },
-  ];
-
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 bg-neutral-950/40 text-white py-4 px-6 sm:px-16 md:px-44 transition-transform duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 bg-neutral-950/40 text-white py-6   px-4 sm:px-16 md:px-44 transition-transform duration-300 ${
         show ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="flex items-center justify-between">
-        <h1 className="font-extrabold text-2xl sm:text-3xl">Portfolio</h1>
+        <h1 className="font-extrabold text-3xl w-[50%]">Portfolio</h1>
 
-        <ul className="hidden md:flex gap-6 text-lg font-extrabold list-none">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <Link
-                to={link.id}
-                smooth={true}
-                duration={500}
-                className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="hidden md:flex gap-4 text-lg font-extrabold w-[50%] list-none justify-end">
+          <li>
+            <Link
+              to="home"
+              smooth={true}
+              duration={500}
+              className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="about"
+              smooth={true}
+              duration={500}
+              className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
+            >
+              ABOUT
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="projects"
+              smooth={true}
+              duration={500}
+              className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
+            >
+              PROJECTS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="skills"
+              smooth={true}
+              duration={500}
+              className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
+            >
+              SKILLS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              className="hover:bg-neutral-900 hover:drop-shadow-xl hover:drop-shadow-white p-2 rounded-md cursor-pointer"
+            >
+              CONTACT
+            </Link>
+          </li>
         </ul>
 
         <button
@@ -61,24 +91,65 @@ function Header() {
         </button>
       </div>
 
+      {/* Mobile dropdown menu */}
       {menuOpen && (
-        <div className="md:hidden mt-4 bg-neutral-900/95 rounded-lg p-4">
-          <ul className="flex flex-col gap-4 text-lg font-bold">
-            {navLinks.map((link) => (
-              <li key={link.id}>
-                <Link
-                  to={link.id}
-                  smooth={true}
-                  duration={500}
-                  onClick={() => setMenuOpen(false)} // close menu after click
-                  className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="md:hidden flex flex-col gap-4 mt-4 w-full bg-neutral-900/95 p-4 rounded-lg">
+          <li>
+            <Link
+              to="home"
+              smooth={true}
+              duration={500}
+              onClick={() => setMenuOpen(false)}
+              className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="about"
+              smooth={true}
+              duration={500}
+              onClick={() => setMenuOpen(false)}
+              className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
+            >
+              ABOUT
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="projects"
+              smooth={true}
+              duration={500}
+              onClick={() => setMenuOpen(false)}
+              className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
+            >
+              PROJECTS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="skills"
+              smooth={true}
+              duration={500}
+              onClick={() => setMenuOpen(false)}
+              className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
+            >
+              SKILLS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              onClick={() => setMenuOpen(false)}
+              className="block p-2 rounded-md hover:bg-neutral-800 cursor-pointer"
+            >
+              CONTACT
+            </Link>
+          </li>
+        </ul>
       )}
     </div>
   );
