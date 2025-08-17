@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { MailContext } from "../context/MailContext";
+import toast from "react-hot-toast";
 function Contact() {
   const { sendEmail } = useContext(MailContext);
   useEffect(() => {
@@ -13,8 +14,29 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!name.trim() || !email.trim() || !text.trim()) {
+      toast.error("Please fill in all fields", {
+        style: { background: "#1f2937", color: "#f87171" },
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email", {
+        style: { background: "#1f2937", color: "#f87171" },
+      });
+      return;
+    }
+
     sendEmail(name, email, text);
+
+    setName("");
+    setEmail("");
+    setText("");
   };
+
   return (
     <div
       id="contact"

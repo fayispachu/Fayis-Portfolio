@@ -11,10 +11,22 @@ export const MailProvider = ({ children }) => {
           email,
           text,
         });
-        toast.success(response.data.message);
+        toast.success(response.data.message, {
+          style: {
+            background: "#1f2937",
+            color: "#ffffff",
+            fontWeight: "bold",
+            fontSize: "14px",
+          },
+        });
       } catch (error) {
         console.error("Error sending email:", error);
-        toast.error("Failed to send email");
+        toast.error("Failed to send email", {
+          style: {
+            background: "#1f2937",
+            color: "#ffffff",
+          },
+        });
       }
     };
 

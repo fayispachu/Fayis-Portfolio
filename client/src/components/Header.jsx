@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { Menu, X } from "lucide-react";
-
+import me from "../assets/fayis.png";
 function Header() {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -28,8 +28,7 @@ function Header() {
       }`}
     >
       <div className="flex items-center justify-between">
-        <h1 className="font-extrabold text-3xl w-[50%]">Portfolio</h1>
-
+        <img  className="w-12 h-12 rounded-full border " src={me} alt="" />
         <ul className="hidden md:flex gap-4 text-lg font-extrabold w-[50%] list-none justify-end">
           <li>
             <Link
