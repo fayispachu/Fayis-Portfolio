@@ -22,7 +22,7 @@ const projects = [
   {
     title: "Portfolio Website",
     description:
-      "Modern and responsive personal portfolio built with React & Tailwind CSS.",
+      "Modern and responsive personal portfolio built with React & Tailwind CSS. Maybe you can't enter in this project because the admin only can give you access.",
     image: portfolioimage,
     github: "https://github.com/fayispachu/Portfolio",
     demo: "https://fayis-portfolio-1.onrender.com",
