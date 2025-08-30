@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import portfolioimage from "../assets/portfolio.png";
 import projectManagementImage from "../assets/projectmanagement.png";
-import cryptoDashboardImage from "../assets/crypto.png";
+import TradingJournalImage from "../assets/crypto.png";
 const projects = [
   {
     title: "Project Management App",
@@ -9,28 +9,28 @@ const projects = [
       "A full-featured MERN stack app with role-based access control and real-time updates.",
     image: projectManagementImage,
     github: "https://github.com/fayispachu/Project-Management-App-New",
-    demo: "#",
+    demo: "https://project-management-app-new-pshf.onrender.com/",
   },
   {
-    title: "Crypto Dashboard",
+    title: "Trading Journal App",
     description:
-      "Live cryptocurrency tracking with interactive charts and responsive design.",
-    image: cryptoDashboardImage,
-    github: "#",
-    demo: "#",
+      "A web application for tracking trading activities and analyzing performance.",
+    image: TradingJournalImage,
+    github: "https://github.com/fayispachu/TradingJournal",
+    demo: "https://tradingjournal-app-fayizpachu.onrender.com/",
   },
   {
     title: "Portfolio Website",
     description:
       "Modern and responsive personal portfolio built with React & Tailwind CSS.",
     image: portfolioimage,
-    github: "#",
-    demo: "#",
+    github: "https://github.com/fayispachu/Portfolio",
+    demo: "https://fayis-portfolio-1.onrender.com",
   },
   {
     title: "E-Commerce Store",
     description:
-      "Full-stack e-commerce platform with secure payments, cart system, and admin dashboard.",
+      "Full-stack e-commerce platform with secure payments, cart system, and admin dashboard. Currently not created",
     image: "https://via.placeholder.com/300x200",
     github: "#",
     demo: "#",
@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Blog Platform",
     description:
-      "Content publishing platform with markdown support, authentication, and comments.",
+      "Content publishing platform with markdown support, authentication, and comments. Currently not created",
     image: "https://via.placeholder.com/300x200",
     github: "#",
     demo: "#",
