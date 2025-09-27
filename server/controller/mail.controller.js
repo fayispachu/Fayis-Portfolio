@@ -33,7 +33,7 @@ export const sendEmail = async (req, res) => {
         ${text}
       `,
     };
- transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 
     res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
