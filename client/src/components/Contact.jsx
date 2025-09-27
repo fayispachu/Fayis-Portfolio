@@ -3,16 +3,19 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { MailContext } from "../context/MailContext";
 import toast from "react-hot-toast";
+
 function Contact() {
   const { sendEmail } = useContext(MailContext);
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false); // loading state
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name.trim() || !email.trim() || !text.trim()) {
@@ -30,11 +33,18 @@ function Contact() {
       return;
     }
 
-    sendEmail(name, email, text);
+    try {
+      setLoading(true); // start loading
+      await sendEmail(name, email, text); // wait for email to send
 
-    setName("");
-    setEmail("");
-    setText("");
+      setName("");
+      setEmail("");
+      setText("");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false); // stop loading
+    }
   };
 
   return (
@@ -116,9 +126,15 @@ function Contact() {
 
             <button
               type="submit"
-              className="w-full bg-white hover:bg-black text-neutral-800 hover:text-white transition p-2.5 sm:p-3 rounded-lg font-semibold text-sm sm:text-base"
+              disabled={loading} // disable button when sending
+              className={`w-full ${
+                loading
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-white hover:bg-black"
+              } text-neutral-800 hover:text-white transition p-2.5 sm:p-3 rounded-lg font-semibold text-sm sm:text-base`}
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}{" "}
+              {/* show loading text */}
             </button>
           </form>
         </div>
