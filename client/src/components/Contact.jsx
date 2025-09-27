@@ -9,7 +9,7 @@ function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
-  // const [loading, setLoading] = useState(false); // loading state
+  const [loading, setLoading] = useState(false); // loading state
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -34,7 +34,7 @@ function Contact() {
     }
 
     try {
-      // setLoading(true); // start loading
+      setLoading(true); // start loading
       await sendEmail(name, email, text); // wait for email to send
 
       setName("");
@@ -42,7 +42,8 @@ function Contact() {
       setText("");
     } catch (error) {
       console.error(error);
-    // } 
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -125,12 +126,14 @@ function Contact() {
 
             <button
               type="submit"
-              // disabled={loading} // disable button when sending
+              disabled={loading} // disable button when sending
               className={`w-full ${
-               "bg-white hover:bg-black"
+                loading
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-white hover:bg-black"
               } text-neutral-800 hover:text-white transition p-2.5 sm:p-3 rounded-lg font-semibold text-sm sm:text-base`}
             >
-         Send Message
+              {loading ? "Sending..." : "Send Message"}{" "}
               {/* show loading text */}
             </button>
           </form>
