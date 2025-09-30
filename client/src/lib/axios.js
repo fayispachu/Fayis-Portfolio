@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 export const axiosInstance = axios.create({
-  baseURL: "https://fayis-portfolio-1.onrender.com/api",
+  baseURL: "http://localhost:4000/api",
 
   withCredentials: true,
 });
