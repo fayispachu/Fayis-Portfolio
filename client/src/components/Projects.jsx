@@ -71,7 +71,7 @@ function Projects() {
   return (
     <div
       id="projects"
-      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-screen"
+      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-screen overflow-hidden"
     >
       {/* Header */}
       <div data-aos="fade-up" className="text-center mb-12">

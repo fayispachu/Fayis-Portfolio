@@ -2,11 +2,111 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link id="logo" rel="icon" type="image/svg+xml" href="https://scontent.fcjb3-2.fna.fbcdn.net/v/t1.15752-9/532008017_3123782017797411_5259894654293169362_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=nk48PuPK8NwQ7kNvwGd7J8Q&_nc_oc=AdmGFU9UOTWN5luk5CdrYKY4hw4y84nfAyNZ_sJdhyTbQOsKJ8oDDAN04AijliS12rg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fcjb3-2.fna&oh=03_Q7cD3AHj_xKSfJ-LXc_5H081NPQIcxjTOf1L3q21u4ono8OTPA&oe=68C8A3BD" />
+
+    <!-- ✅ Favicon and Touch Icon -->
+    <link
+      id="logo"
+      rel="icon"
+      type="image/png"
+      href="https://res.cloudinary.com/dtcjm5qss/image/upload/v1762590117/fayis_xwb9ig.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://res.cloudinary.com/dtcjm5qss/image/upload/v1762590117/fayis_xwb9ig.png"
+    />
+
+    <!-- ✅ Responsive and Rendering Setup -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fayis</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ✅ Basic SEO -->
+    <title>Fayis | Full-Stack Developer Portfolio</title>
+    <meta name="title" content="Fayis | Full-Stack Developer Portfolio" />
+    <meta
+      name="description"
+      content="I'm Fayis K — a passionate full-stack developer who builds fast, modern, and responsive web applications using the MERN stack. Explore my projects, skills, and ways to connect."
+    />
+    <meta
+      name="keywords"
+      content="Fayis, Fayis K, Full Stack Developer, MERN, React, Node.js, Express, MongoDB, Portfolio, JavaScript, Developer, Web Developer, Frontend, Backend, Projects, Freelance"
+    />
+    <meta name="author" content="Fayis K" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+
+    <!-- ✅ Canonical URL -->
+    <link rel="canonical" href="https://fayis.site/" />
+
+    <!-- ✅ Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fayis.site/" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Fayis | Full-Stack Developer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Explore Fayis's portfolio — a full-stack developer specializing in React, Node.js, Express, and modern web technologies."
+    />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/dtcjm5qss/image/upload/v1762590117/fayis_xwb9ig.png"
+    />
+    <meta property="og:image:alt" content="Fayis K Portfolio Preview" />
+    <meta property="og:site_name" content="Fayis Portfolio" />
+
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://fayis.site/" />
+    <meta name="twitter:creator" content="@fayisk" />
+    <meta
+      name="twitter:title"
+      content="Fayis | Full-Stack Developer Portfolio"
+    />
+    <meta
+      name="twitter:description"
+      content="Discover Fayis K — a full-stack developer creating innovative web apps using React, Node.js, and MongoDB."
+    />
+    <meta
+      name="twitter:image"
+      content="https://res.cloudinary.com/dtcjm5qss/image/upload/v1762590117/fayis_xwb9ig.png"
+    />
+
+    <!-- ✅ PWA Manifest (optional) -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- ✅ Structured Data (Google Rich Results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Fayis K",
+        "url": "https://fayis.site",
+        "image": "https://res.cloudinary.com/dtcjm5qss/image/upload/v1762590117/fayis_xwb9ig.png",
+        "sameAs": [
+          "https://github.com/fayisk",
+          "https://www.linkedin.com/in/fayisk/",
+          "https://x.com/fayisk"
+        ],
+        "jobTitle": "Full-Stack Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Independent Developer"
+        },
+        "description": "Full-stack developer skilled in React, Node.js, Express, and MongoDB. Passionate about building interactive web experiences.",
+        "knowsAbout": ["React", "Node.js", "JavaScript", "MERN Stack", "Web Development", "Tailwind CSS"]
+      }
+    </script>
+
+
   </head>
-  <body>
+
+  <body class="bg-neutral-950 text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

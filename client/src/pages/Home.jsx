@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Header from "../components/Header";
 import me from "../assets/fayis.png";
 import Skills from "../components/Skills";
@@ -7,34 +8,98 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 
 function Home() {
+  // Reusable animation variants for smoother transitions
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
     <>
       <Header />
 
-      <div
+      {/* Hero Section */}
+      <motion.section
         id="home"
-        className="w-full bg-neutral-950 lg:h-screen  sm:h-[70vh] flex flex-col md:flex-row items-center  py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10"
+        initial="hidden"
+        animate="visible"
+        className="w-full bg-neutral-950 lg:h-screen sm:h-[70vh] flex flex-col md:flex-row items-center py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10 oeverflow-hidden pt-24"
       >
-        <div className="flex flex-col items-center md:items-start justify-center gap-4 w-full md:w-1/2 text-center md:text-left">
-          <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white font-serif">
+        {/* Left Text Section */}
+        <motion.div
+          variants={fadeInLeft}
+          className="flex flex-col items-center md:items-start justify-center gap-4 w-full md:w-1/2 text-center md:text-left"
+        >
+          <motion.h3
+            whileHover={{ color: "#06b6d4" }}
+            className="font-bold text-2xl sm:text-3xl md:text-4xl text-white font-serif transition-all duration-300"
+          >
             Hey
-          </h3>
-          <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight">
+          </motion.h3>
+
+          <motion.h1
+            whileHover={{ color: "#06b6d4" }}
+            className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight transition-all duration-300"
+          >
             I am Fayis K
-          </h1>
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-md">
+          </motion.h1>
+
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-400 text-sm sm:text-base md:text-lg max-w-md"
+          >
             A passionate full-stack developer who loves building modern web
             applications and solving problems with code.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end items-center">
-          <div className="relative w-72 h-72 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white">
-            <img className="w-full h-full object-cover" src={me} alt="Fayis" />
-          </div>
-        </div>
-      </div>
+        {/* Right Image Section */}
+        <motion.div
+          variants={fadeInRight}
+          className="w-full md:w-1/2 flex justify-center md:justify-end items-center"
+        >
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 40px #06b6d4",
+              borderColor: "#06b6d4",
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="relative w-72 h-72 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white transition-all duration-300 will-change-transform"
+          >
+            <img
+              className="w-full h-full object-cover"
+              src={me}
+              alt="Fayis"
+              loading="lazy"
+            />
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
+      {/* Other Sections */}
       <About />
       <Projects />
       <Skills />

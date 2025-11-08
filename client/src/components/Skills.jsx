@@ -79,7 +79,7 @@ function Skills() {
   return (
     <div
       id="skills"
-      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52"
+      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52 overflow-hidden"
     >
       {/* Title */}
       <h1
