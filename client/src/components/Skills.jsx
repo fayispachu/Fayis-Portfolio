@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Reorder, motion } from "framer-motion";
+import { RotateCcw } from "lucide-react"; // reset icon
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -29,16 +30,44 @@ const initialSkills = [
 
 function Skills() {
   const [skills, setSkills] = useState(initialSkills);
+  const [positions, setPositions] = useState({});
+  const [activeTooltip, setActiveTooltip] = useState(null);
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true, easing: "ease-in-out" });
   }, []);
 
+  const handleMove = (id) => {
+    const randomX = Math.random() * (window.innerWidth - 150) - window.innerWidth / 2;
+    const randomY = Math.random() * (window.innerHeight - 200) - window.innerHeight / 3;
+    setPositions((prev) => ({
+      ...prev,
+      [id]: { x: randomX, y: randomY },
+    }));
+
+    setActiveTooltip(id);
+    setTimeout(() => setActiveTooltip(null), 3000);
+  };
+
+  const resetPositions = () => {
+    setPositions({});
+  };
+
   return (
     <div
       id="skills"
-      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52 overflow-hidden"
+      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52 overflow-hidden relative"
     >
+      {/* Top Right Reset Icon */}
+      <motion.button
+        onClick={resetPositions}
+        whileHover={{ rotate: 90, scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 10 }}
+        className="absolute top-8 right-8 bg-neutral-800 hover:bg-neutral-700 text-cyan-400 p-3 rounded-full shadow-md border border-cyan-700 transition-all duration-300"
+      >
+        <RotateCcw size={22} />
+      </motion.button>
+
       <h1
         data-aos="fade-up"
         className="font-bold text-5xl font-serif text-white"
@@ -46,7 +75,6 @@ function Skills() {
         Skills
       </h1>
 
-      {/* ✅ FIXED: Use flex-wrap instead of grid to prevent compareMin crash */}
       <Reorder.Group
         axis="x"
         values={skills}
@@ -61,10 +89,19 @@ function Skills() {
             className="group relative flex flex-col items-center cursor-grab active:cursor-grabbing"
           >
             <motion.div
+              animate={positions[skill.id] || { x: 0, y: 0 }}
+              transition={{ type: "spring", stiffness: 60, damping: 10 }}
+              onClick={() => handleMove(skill.id)}
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
-              <div className="absolute -top-5 w-56 p-4 bg-neutral-900 text-white text-sm rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-10">
+              <div
+                className={`absolute -top-5 w-56 p-4 bg-neutral-900 text-white text-sm rounded-lg shadow-lg transition-all duration-300 z-10 ${
+                  activeTooltip === skill.id
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
+                }`}
+              >
                 <h3 className="font-bold text-cyan-400 mb-1">{skill.name}</h3>
                 <p className="text-gray-300">{skill.desc}</p>
               </div>
