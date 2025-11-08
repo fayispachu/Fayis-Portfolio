@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import htmlicon from "../assets/html.png";
 import reacticon from "../assets/react.png";
 import nodeicon from "../assets/nodejs.png";
@@ -64,14 +67,35 @@ const skills = [
 ];
 
 function Skills() {
-  return (
-    <div id="skills" className="bg-neutral-950 w-full min-h-screen flex flex-col items-center  gap-10 py-32 px-6  lg:px-52">
-      <h1 className="font-bold text-5xl font-serif text-white">Skills</h1>
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
 
+  return (
+    <div
+      id="skills"
+      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52"
+    >
+      {/* Title */}
+      <h1
+        data-aos="fade-up"
+        className="font-bold text-5xl font-serif text-white"
+      >
+        Skills
+      </h1>
+
+      {/* Skills Grid */}
       <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 w-full">
         {skills.map((skill, idx) => (
           <div
             key={idx}
+            data-aos="fade-up"
+            data-aos-delay={idx * 100} // Staggered animation
             className="group relative flex flex-col items-center cursor-pointer"
           >
             <div className="absolute -top-5 w-56 p-4 bg-neutral-900 text-white text-sm rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-10">

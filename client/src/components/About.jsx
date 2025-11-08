@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-scroll";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ComputersCanvas from "./ComputersCanvas";
 
 function About() {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration
+      once: true, // Only animate once
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
-    <div id="about" className="flex flex-col items-center justify-center bg-neutral-900 w-full text-white transition-all px-4 sm:px-16 md:px-24 py-12 md:py-16 gap-10 relative">
-      <h1 className="font-bold text-4xl sm:text-5xl font-serif text-white mb-6 sm:mb-12">
+    <div
+      id="about"
+      className="flex flex-col items-center justify-center bg-neutral-900 w-full text-white transition-all px-4 sm:px-16 md:px-24 py-12 md:py-16 gap-10 relative"
+    >
+      {/* Title */}
+      <h1
+        data-aos="fade-up"
+        className="font-bold text-4xl sm:text-5xl font-serif text-white mb-6 sm:mb-12"
+      >
         About
       </h1>
 
-      <div className="flex flex-col-reverse md:flex-row justify-center items-center w-full gap-8">
-        <div className="w-full md:w-2/3 max-w-2xl text-left">
+      {/* Content */}
+      <div
+        className="flex flex-col-reverse md:flex-row justify-center items-center w-full gap-8"
+      >
+        {/* Text Section */}
+        <div
+          data-aos="fade-right"
+          data-aos-delay="200"
+          className="w-full md:w-2/3 max-w-2xl text-left"
+        >
           <p className="font-medium text-lg sm:text-xl md:text-2xl leading-relaxed hover:drop-shadow-2xl hover:drop-shadow-neutral-500 transition">
             I’m a self-taught{" "}
             <span className="text-cyan-400 hover:drop-shadow-2xl hover:drop-shadow-neutral-500 transition">
@@ -32,13 +58,18 @@ function About() {
           </p>
         </div>
 
-        {/* Canvas Section */}
-        <div className="w-full md:w-2/3 flex justify-center h-64 sm:h-80 md:h-[50vh]">
+        {/* 3D Canvas Section */}
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="300"
+          className="w-full md:w-2/3 flex justify-center h-64 sm:h-80 md:h-[50vh]"
+        >
           <ComputersCanvas />
         </div>
       </div>
 
-      <div className="mt-8">
+      {/* Button */}
+      <div data-aos="fade-up" data-aos-delay="400" className="mt-8">
         <Link
           to="projects"
           smooth={true}

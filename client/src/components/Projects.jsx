@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+// Images
 import portfolioimage from "../assets/portfolio.png";
 import projectManagementImage from "../assets/projectmanagement.png";
 import TradingJournalImage from "../assets/crypto.png";
+
+// Projects data
 const projects = [
   {
     title: "Project Management App",
@@ -49,6 +55,15 @@ function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation speed
+      once: true, // Animate only once
+      easing: "ease-in-out",
+    });
+  }, []);
+
   const totalPages = Math.ceil(projects.length / cardsPerPage);
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentProjects = projects.slice(startIndex, startIndex + cardsPerPage);
@@ -58,17 +73,21 @@ function Projects() {
       id="projects"
       className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-screen"
     >
-      <div className="text-center mb-12">
+      {/* Header */}
+      <div data-aos="fade-up" className="text-center mb-12">
         <h2 className="font-bold text-4xl md:text-5xl font-serif">Projects</h2>
         <p className="mt-4 text-lg text-gray-400">
           A showcase of my work — blending clean code with creative design.
         </p>
       </div>
 
+      {/* Projects Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {currentProjects.map((project, index) => (
           <div
             key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 150}
             className="relative group bg-neutral-950 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
           >
             <img
@@ -87,7 +106,7 @@ function Projects() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md text-sm  shadow-lg shadow-emerald-500/30 transition"
+                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md text-sm shadow-lg shadow-cyan-500/30 transition"
                 >
                   GitHub
                 </a>
@@ -95,7 +114,7 @@ function Projects() {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md text-sm  shadow-lg shadow-emerald-500/30 transition"
+                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md text-sm shadow-lg shadow-emerald-500/30 transition"
                 >
                   Live Demo
                 </a>
@@ -105,16 +124,19 @@ function Projects() {
         ))}
       </div>
 
+      {/* Pagination */}
       <div className="flex justify-center mt-10 gap-2">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => setCurrentPage(index + 1)}
+            data-aos="zoom-in"
+            data-aos-delay={index * 100}
             className={`px-4 py-2 rounded-md text-sm font-medium border 
               ${
                 currentPage === index + 1
-                  ? " bg-black text-white border-gray-300 hover:bg-neutral-900    "
-                  : " bg-white text-black border-neutral-500"
+                  ? "bg-black text-white border-gray-300 hover:bg-neutral-900"
+                  : "bg-white text-black border-neutral-500 hover:bg-gray-200"
               }`}
           >
             {index + 1}
