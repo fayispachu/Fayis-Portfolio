@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import Header from "../components/Header";
 import me from "../assets/fayis.png";
 import Skills from "../components/Skills";
@@ -7,33 +7,59 @@ import About from "../components/About";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 
+// Typing animation component
+function TypingText({ text = "", speed = 0.1, className = "" }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = rounded.onChange((latest) => {
+      setDisplayText(text.slice(0, latest));
+    });
+    const controls = animate(count, text.length, {
+      type: "tween",
+      duration: text.length * speed,
+      ease: "linear",
+      onComplete: () => {
+        unsubscribe();
+      },
+    });
+    return () => {
+      unsubscribe();
+      controls.stop();
+    };
+  }, [text, speed, count, rounded]);
+
+  return (
+    <span className={className}>
+      {displayText}
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+        className="ml-1 text-cyan-400"
+      >
+        |
+      </motion.span>
+    </span>
+  );
+}
+
 function Home() {
-  // Reusable animation variants for smoother transitions
+  // Reusable animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   const fadeInLeft = {
     hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   const fadeInRight = {
     hidden: { opacity: 0, x: 50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   return (
@@ -45,7 +71,7 @@ function Home() {
         id="home"
         initial="hidden"
         animate="visible"
-        className="w-full bg-neutral-950 lg:h-screen sm:h-[70vh] flex flex-col md:flex-row items-center py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10 oeverflow-hidden pt-24"
+        className="w-full bg-neutral-950 lg:h-screen sm:h-[70vh] flex flex-col md:flex-row items-center py-16 px-6 md:py-24 md:px-16 lg:px-32 gap-10 overflow-hidden pt-24"
       >
         {/* Left Text Section */}
         <motion.div
@@ -63,7 +89,7 @@ function Home() {
             whileHover={{ color: "#06b6d4" }}
             className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight transition-all duration-300"
           >
-            I am Fayis K
+            I am <TypingText text="Fayis K" speed={0.15} />
           </motion.h1>
 
           <motion.p
