@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Reorder, motion } from "framer-motion";
-import { RotateCcw } from "lucide-react"; // reset icon
+import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -16,105 +15,149 @@ import githubicon from "../assets/github.png";
 import tailwindicon from "../assets/tailwind.png";
 
 const initialSkills = [
-  { id: 1, icon: htmlicon, name: "HTML", desc: "Semantic, accessible structures." },
-  { id: 2, icon: cssicon, name: "CSS", desc: "Responsive layouts & animations." },
-  { id: 3, icon: reacticon, name: "React", desc: "Dynamic UI, hooks & routing." },
-  { id: 4, icon: nodeicon, name: "Node.js", desc: "Backend APIs & real-time." },
-  { id: 5, icon: expressicon, name: "Express.js", desc: "Middleware & REST APIs." },
-  { id: 6, icon: mongodbicon, name: "MongoDB", desc: "Schema design & queries." },
-  { id: 7, icon: mysqlicon, name: "MySQL", desc: "Relational DB & queries." },
-  { id: 8, icon: githubicon, name: "GitHub", desc: "Version control." },
-  { id: 9, icon: figmaicon, name: "Figma", desc: "UI/UX & prototyping." },
-  { id: 10, icon: tailwindicon, name: "Tailwind CSS", desc: "Utility-first styling." },
+  { id: 1, icon: htmlicon, name: "HTML" },
+  { id: 2, icon: cssicon, name: "CSS" },
+  { id: 3, icon: reacticon, name: "React" },
+  { id: 4, icon: nodeicon, name: "Node.js" },
+  { id: 5, icon: expressicon, name: "Express.js" },
+  { id: 6, icon: mongodbicon, name: "MongoDB" },
+  { id: 7, icon: mysqlicon, name: "MySQL" },
+  { id: 8, icon: githubicon, name: "GitHub" },
+  { id: 9, icon: figmaicon, name: "Figma" },
+  { id: 10, icon: tailwindicon, name: "Tailwind CSS" },
 ];
 
+// 💡 Descriptions for all icons
+const skillDescriptions = {
+  HTML:
+    "HTML: Strong understanding of semantic markup and accessibility best practices, crafting structured and SEO-friendly web pages.",
+  CSS:
+    "CSS: Skilled in creating responsive designs, animations, and layouts using Flexbox, Grid.",
+  React:
+    "React: Experienced in building dynamic SPAs using hooks, routing, and state management for highly interactive UIs.",
+  "Node.js":
+    "Node.js: Proficient in building scalable backend systems, handling APIs.",
+  "Express.js":
+    "Express.js: Skilled at creating RESTful APIs, middleware logic, and handling authentication and routing efficiently.",
+  MongoDB:
+    "MongoDB: Expertise in schema design, data modeling, aggregation pipelines, and optimization using Mongoose in MERN stack projects.",
+  MySQL:
+    "MySQL: Experience designing relational databases, writing optimized SQL queries, and ensuring data consistency and security.",
+  GitHub:
+    "GitHub: Comfortable with version control, collaboration, branching strategies, and managing repositories for team projects.",
+  Figma:
+    "Figma: Adept at designing clean, intuitive interfaces and creating prototypes to visualize UX flows before development.",
+  "Tailwind CSS":
+    "Tailwind CSS: Efficient at crafting beautiful, responsive UIs quickly with utility-first classes and consistent design systems.",
+};
+
 function Skills() {
-  const [skills, setSkills] = useState(initialSkills);
-  const [positions, setPositions] = useState({});
-  const [activeTooltip, setActiveTooltip] = useState(null);
+  const [skills] = useState(initialSkills);
+  const [inBox, setInBox] = useState([]);
+  const [activeSkill, setActiveSkill] = useState(null);
 
   useEffect(() => {
-    AOS.init({ duration: 800, once: true, easing: "ease-in-out" });
+    AOS.init({ duration: 800, once: true });
   }, []);
 
-  const handleMove = (id) => {
-    const randomX = Math.random() * (window.innerWidth - 150) - window.innerWidth / 2;
-    const randomY = Math.random() * (window.innerHeight - 200) - window.innerHeight / 3;
-    setPositions((prev) => ({
-      ...prev,
-      [id]: { x: randomX, y: randomY },
-    }));
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData("id");
+    const droppedSkill = skills.find((s) => String(s.id) === id);
 
-    setActiveTooltip(id);
-    setTimeout(() => setActiveTooltip(null), 3000);
+    if (!inBox.includes(id)) {
+      setInBox((prev) => [...prev, id]);
+    }
+    setActiveSkill(droppedSkill?.name);
   };
 
-  const resetPositions = () => {
-    setPositions({});
-  };
+  const handleDragOver = (e) => e.preventDefault();
 
   return (
     <div
       id="skills"
-      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-32 px-6 lg:px-52 overflow-hidden relative"
+      className="bg-neutral-950 w-full min-h-screen flex flex-col items-center gap-10 py-28 px-4 md:px-20 lg:px-36 overflow-hidden"
     >
-      {/* Top Right Reset Icon */}
-      <motion.button
-        onClick={resetPositions}
-        whileHover={{ rotate: 90, scale: 1.1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 10 }}
-        className="absolute top-8 right-8 bg-neutral-800 hover:bg-neutral-700 text-cyan-400 p-3 rounded-full shadow-md border border-cyan-700 transition-all duration-300"
-      >
-        <RotateCcw size={22} />
-      </motion.button>
-
       <h1
         data-aos="fade-up"
-        className="font-bold text-5xl font-serif text-white"
+        className="font-bold text-5xl font-serif text-white mb-10"
       >
         Skills
       </h1>
 
-      <Reorder.Group
-        axis="x"
-        values={skills}
-        onReorder={setSkills}
-        className="flex flex-wrap justify-center gap-10 w-full"
-      >
+      {/* Skill Icons */}
+      <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl">
         {skills.map((skill) => (
-          <Reorder.Item
+          <motion.div
             key={skill.id}
-            value={skill}
-            whileDrag={{ scale: 1.1 }}
-            className="group relative flex flex-col items-center cursor-grab active:cursor-grabbing"
+            draggable
+            onDragStart={(e) => e.dataTransfer.setData("id", skill.id)}
+            whileHover={{ scale: 1.05 }}
+            className="flex flex-col items-center cursor-grab active:cursor-grabbing"
           >
-            <motion.div
-              animate={positions[skill.id] || { x: 0, y: 0 }}
-              transition={{ type: "spring", stiffness: 60, damping: 10 }}
-              onClick={() => handleMove(skill.id)}
-              whileHover={{ scale: 1.05 }}
-              className="flex flex-col items-center"
-            >
-              <div
-                className={`absolute -top-5 w-56 p-4 bg-neutral-900 text-white text-sm rounded-lg shadow-lg transition-all duration-300 z-10 ${
-                  activeTooltip === skill.id
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
-                }`}
-              >
-                <h3 className="font-bold text-cyan-400 mb-1">{skill.name}</h3>
-                <p className="text-gray-300">{skill.desc}</p>
-              </div>
-
-              <img
-                src={skill.icon}
-                alt={skill.name}
-                className="w-24 h-24 object-contain transition-transform duration-300 group-hover:scale-110"
-              />
-            </motion.div>
-          </Reorder.Item>
+            <img
+              src={skill.icon}
+              alt={skill.name}
+              className={`w-20 h-20 md:w-24 md:h-24 object-contain transition-transform duration-300 rounded-xl ${
+                inBox.includes(String(skill.id))
+                  ? "opacity-40 grayscale"
+                  : "opacity-100"
+              }`}
+            />
+            <p className="text-gray-300 mt-2 text-sm md:text-base font-medium">
+              {skill.name}
+            </p>
+          </motion.div>
         ))}
-      </Reorder.Group>
+      </div>
+
+      {/* Drop Zone */}
+      <motion.div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        animate={{
+          borderColor: activeSkill ? "#00ffff" : "#22d3ee",
+          boxShadow: activeSkill
+            ? "0 0 25px rgba(0,255,255,0.6)"
+            : "0 0 0 rgba(0,0,0,0)",
+        }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-lg h-60 md:h-64 mt-10 border-2 border-dashed border-cyan-400 rounded-2xl flex flex-col justify-center items-center text-gray-300 text-center px-6"
+      >
+        {activeSkill ? (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col items-center text-center"
+          >
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-teal-300 bg-clip-text text-transparent mb-3"
+              animate={{
+                textShadow: [
+                  "0 0 10px rgba(0,255,255,0.8)",
+                  "0 0 20px rgba(0,255,255,0.5)",
+                  "0 0 10px rgba(0,255,255,0.8)",
+                ],
+              }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              {activeSkill} Skill Highlight ⚙️
+            </motion.h2>
+            <p className="text-gray-400 text-sm md:text-base max-w-sm leading-relaxed">
+              {skillDescriptions[activeSkill]}
+            </p>
+          </motion.div>
+        ) : (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-gray-400 text-sm md:text-base"
+          >
+            Drag and drop any skill icon here to learn more about my expertise!
+          </motion.p>
+        )}
+      </motion.div>
     </div>
   );
 }

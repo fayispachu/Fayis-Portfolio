@@ -135,8 +135,8 @@ function Projects() {
             className={`px-4 py-2 rounded-md text-sm font-medium border 
               ${
                 currentPage === index + 1
-                  ? "bg-black text-white border-gray-300 hover:bg-neutral-900"
-                  : "bg-white text-black border-neutral-500 hover:bg-gray-200"
+                  ? "bg-white text-black border-neutral-500 hover:bg-gray-200" 
+                  :    "bg-black text-white border-gray-300 hover:bg-neutral-900"
               }`}
           >
             {index + 1}

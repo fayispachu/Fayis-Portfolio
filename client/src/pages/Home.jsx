@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import Header from "../components/Header";
 import me from "../assets/fayis.png";
 import Skills from "../components/Skills";
@@ -7,29 +7,35 @@ import About from "../components/About";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 
-// Typing animation component
-function TypingText({ text = "", speed = 0.1, className = "" }) {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
+function TypingText({ text = "", speed = 100, className = "" }) {
   const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = rounded.onChange((latest) => {
-      setDisplayText(text.slice(0, latest));
-    });
-    const controls = animate(count, text.length, {
-      type: "tween",
-      duration: text.length * speed,
-      ease: "linear",
-      onComplete: () => {
-        unsubscribe();
-      },
-    });
-    return () => {
-      unsubscribe();
-      controls.stop();
-    };
-  }, [text, speed, count, rounded]);
+    let typingSpeed = isDeleting ? speed / 2 : speed; 
+    let timeout;
+
+    if (!isDeleting && index < text.length) {
+      timeout = setTimeout(() => {
+        setDisplayText(text.slice(0, index + 1));
+        setIndex(index + 1);
+      }, typingSpeed);
+    } else if (isDeleting && index > 0) {
+      timeout = setTimeout(() => {
+        setDisplayText(text.slice(0, index - 1));
+        setIndex(index - 1);
+      }, typingSpeed);
+    } else if (index === text.length && !isDeleting) {
+      // Pause before deleting
+      timeout = setTimeout(() => setIsDeleting(true), 1500);
+    } else if (isDeleting && index === 0) {
+      // Pause before typing again
+      timeout = setTimeout(() => setIsDeleting(false), 800);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [index, isDeleting, text, speed]);
 
   return (
     <span className={className}>
@@ -46,7 +52,6 @@ function TypingText({ text = "", speed = 0.1, className = "" }) {
 }
 
 function Home() {
-  // Reusable animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -89,7 +94,7 @@ function Home() {
             whileHover={{ color: "#06b6d4" }}
             className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight transition-all duration-300"
           >
-            I am <TypingText text="Fayis K" speed={0.15} />
+            I am <TypingText text="Fayis K" speed={120} />
           </motion.h1>
 
           <motion.p
