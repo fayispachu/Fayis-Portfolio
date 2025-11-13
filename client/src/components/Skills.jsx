@@ -124,6 +124,7 @@ function Skills() {
         transition={{ duration: 0.6 }}
         className="w-full max-w-lg h-60 md:h-64 mt-10 border-2 border-dashed border-cyan-400 rounded-2xl flex flex-col justify-center items-center text-gray-300 text-center px-6"
       >
+        {/* ok */}
         {activeSkill ? (
           <motion.div
             initial={{ opacity: 0, y: 40 }}
