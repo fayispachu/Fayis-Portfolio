@@ -13,7 +13,7 @@ function TypingText({ text = "", speed = 100, className = "" }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let typingSpeed = isDeleting ? speed / 2 : speed; 
+    let typingSpeed = isDeleting ? speed / 2 : speed;
     let timeout;
 
     if (!isDeleting && index < text.length) {
@@ -27,10 +27,8 @@ function TypingText({ text = "", speed = 100, className = "" }) {
         setIndex(index - 1);
       }, typingSpeed);
     } else if (index === text.length && !isDeleting) {
-      // Pause before deleting
       timeout = setTimeout(() => setIsDeleting(true), 1500);
     } else if (isDeleting && index === 0) {
-      // Pause before typing again
       timeout = setTimeout(() => setIsDeleting(false), 800);
     }
 
@@ -118,7 +116,20 @@ function Home() {
               borderColor: "#06b6d4",
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="relative w-72 h-72 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-lg border-4 border-white transition-all duration-300 will-change-transform"
+            className={`
+              relative w-72 h-72 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96
+              rounded-full overflow-hidden border-4 transition-all duration-300 will-change-transform
+
+              /* === MOBILE (base) ===
+                 show cyan border + glow + slight scale by default (mobile first)
+               */
+              border-cyan-400 shadow-[0_0_40px_#06b6d4] scale-105
+
+              /* === Desktop & larger screens ===
+                 reset to white border, no glow, normal scale — hover will add glow
+               */
+              md:border-white md:shadow-none md:scale-100
+            `}
           >
             <img
               className="w-full h-full object-cover"
