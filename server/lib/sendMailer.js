@@ -34,7 +34,7 @@ ${message}
 
     // Send mail
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully:", info.messageId);
+    console.log("Email sent successfully");
     return { success: true };
   } catch (error) {
     console.error("❌ Error sending email:", error);
